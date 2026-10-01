@@ -9,7 +9,7 @@ El sitio público del portfolio está desarrollado en Astro y consume la informa
 ## Repositorios
 
 * **CMS:** este repositorio
-* **Portfolio:** [URL DEL REPOSITORIO DEL PORTFOLIO EN ASTRO](git@github.com:Fabrizio9898/PortfolioForClient-aruitecture-.git)
+- **Portfolio:** [Portfolio en Astro](https://github.com/Fabrizio9898/PortfolioForClient-aruitecture-)
 
 ## Tecnologías
 
@@ -30,8 +30,8 @@ El sitio público del portfolio está desarrollado en Astro y consume la informa
 Cloná el repositorio e instalá las dependencias:
 
 ```bash
-git clone [git@github.com:Fabrizio9898/PaylaodCMSforArquitecturePortfolio.git]
-cd [PaylaodCMSforArquitecturePortfolio]
+git clone git@github.com:Fabrizio9898/PaylaodCMSforArquitecturePortfolio.git
+cd PaylaodCMSforArquitecturePortfolio
 pnpm install
 ```
 
