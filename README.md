@@ -1,67 +1,142 @@
-# Payload Blank Template
+# Portfolio CMS
 
-This template comes configured with the bare minimum to get started on anything you need.
+CMS y panel de administración para el portfolio de arquitectura.
 
-## Quick start
+Este proyecto está desarrollado con [Payload CMS](https://payloadcms.com/) y se encarga de gestionar los contenidos del portfolio, principalmente proyectos, imágenes y usuarios.
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+El sitio público del portfolio está desarrollado en Astro y consume la información de este CMS mediante su API.
 
-## Quick Start - local setup
+## Repositorios
 
-To spin up this template locally, follow these steps:
+* **CMS:** este repositorio
+* **Portfolio:** [URL DEL REPOSITORIO DEL PORTFOLIO EN ASTRO](git@github.com:Fabrizio9898/PortfolioForClient-aruitecture-.git)
 
-### Clone
+## Tecnologías
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+* Payload CMS
+* Next.js
+* MongoDB
+* TypeScript
+* React
 
-### Development
+## Requisitos
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+* Node.js 20+
+* pnpm
+* MongoDB
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+## Instalación
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+Cloná el repositorio e instalá las dependencias:
 
-#### Docker (Optional)
+```bash
+git clone [git@github.com:Fabrizio9898/PaylaodCMSforArquitecturePortfolio.git]
+cd [PaylaodCMSforArquitecturePortfolio]
+pnpm install
+```
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
+Copiá las variables de entorno:
 
-To do so, follow these steps:
+```bash
+cp .env.example .env
+```
 
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+Configurá las variables necesarias en `.env`, principalmente la conexión a MongoDB.
 
-## How it works
+## Desarrollo
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
+Para iniciar el proyecto en modo desarrollo:
 
-### Collections
+```bash
+pnpm dev
+```
 
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
+El panel de administración estará disponible en:
 
-- #### Users (Authentication)
+```text
+http://localhost:3000/admin
+```
 
-  Users are auth-enabled collections that have access to the admin panel.
+La primera vez que ingreses, Payload te permitirá crear el usuario administrador.
 
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/3.x/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
+## Contenido
 
-- #### Media
+El CMS permite administrar el contenido del portfolio desde el panel de Payload.
 
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
+### Projects
 
-### Docker
+Colección utilizada para gestionar los proyectos del portfolio.
 
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
+Desde el panel se pueden crear, editar y publicar proyectos.
 
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
+### Media
 
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
+Colección utilizada para gestionar imágenes y archivos utilizados por los proyectos.
 
-## Questions
+### Users
 
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+Usuarios que tienen acceso al panel de administración.
+
+## Publicación
+
+Los proyectos pueden guardarse como borradores y publicarse desde el panel.
+
+Una vez publicados, el portfolio en Astro consume los datos desde la API de Payload.
+
+```text
+┌──────────────┐
+│ Payload CMS  │
+│              │
+│  Projects    │
+│  Media       │
+│  Users       │
+└──────┬───────┘
+       │
+       │ API
+       ↓
+┌──────────────┐
+│ Astro        │
+│ Portfolio    │
+└──────────────┘
+```
+
+## Estructura general
+
+```text
+CMS (Payload)
+├── Projects
+├── Media
+└── Users
+
+Portfolio (Astro)
+└── Consume la API del CMS
+```
+
+## Producción
+
+Antes de desplegar el proyecto en producción:
+
+1. Configurar las variables de entorno.
+2. Configurar la base de datos de producción.
+3. Configurar el almacenamiento de imágenes/media.
+4. Crear el usuario administrador.
+5. Configurar la URL del CMS utilizada por el portfolio de Astro.
+
+## Próximas integraciones
+
+El CMS está preparado para incorporar nuevas funcionalidades, entre ellas:
+
+* Importación de proyectos desde Google Drive.
+* Generación de borradores mediante IA.
+* Revisión y publicación de proyectos desde el panel.
+* Personalización del dashboard de administración.
+
+## Recursos
+
+* [Documentación de Payload](https://payloadcms.com/docs)
+* [Repositorio oficial de Payload](https://github.com/payloadcms/payload)
+* [Portfolio en Astro](URL_DEL_REPO_ASTRO)
+
+## Licencia
+
+Proyecto privado.
