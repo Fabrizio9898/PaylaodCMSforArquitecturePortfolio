@@ -42,16 +42,10 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
-    ...(process.env.NODE_ENV === 'production'
-      ? [
-          vercelBlobStorage({
-            enabled: true,
-            collections: {
-              media: true,
-            },
-            token: process.env.BLOB_READ_WRITE_TOKEN || '',
-          }),
-        ]
-      : []),
+    vercelBlobStorage({
+      enabled: process.env.NODE_ENV === 'production',
+      collections: { media: true },
+      token: process.env.BLOB_READ_WRITE_TOKEN || '',
+    }),
   ],
 })

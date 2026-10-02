@@ -21,13 +21,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   ALTER TABLE "site_settings_socials" ADD CONSTRAINT "site_settings_socials_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."site_settings"("id") ON DELETE cascade ON UPDATE no action;
   CREATE INDEX "site_settings_socials_order_idx" ON "site_settings_socials" USING btree ("_order");
-  CREATE INDEX "site_settings_socials_parent_id_idx" ON "site_settings_socials" USING btree ("_parent_id");
-  ALTER TABLE "media" DROP COLUMN "_objectkey";`)
+  CREATE INDEX "site_settings_socials_parent_id_idx" ON "site_settings_socials" USING btree ("_parent_id");`)
 }
 
 export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
    DROP TABLE "site_settings_socials" CASCADE;
-  DROP TABLE "site_settings" CASCADE;
-  ALTER TABLE "media" ADD COLUMN "_objectkey" varchar;`)
+  DROP TABLE "site_settings" CASCADE;`)
 }
