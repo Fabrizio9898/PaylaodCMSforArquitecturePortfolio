@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { slugField } from '../fields/slug'
+import { rebuildPortfolio } from '../hooks/rebuildPortfolio'
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
@@ -9,6 +10,10 @@ export const Projects: CollectionConfig = {
     defaultColumns: ['title', 'projectType', 'year', 'status', 'featured'],
   },
   access: { read: () => true },
+  hooks:{
+afterChange: [rebuildPortfolio],
+afterDelete: [rebuildPortfolio],
+  },
   defaultSort: '-year',
   fields: [
     { name: 'title', type: 'text', required: true, label: 'Título' },

@@ -1,9 +1,13 @@
+import { rebuildPortfolio } from '@/hooks/rebuildPortfolio'
 import type { GlobalConfig } from 'payload'
 
 export const Hero: GlobalConfig = {
   slug: 'hero',
   label: 'Hero (inicio)',
   access: { read: () => true },
+  hooks:{
+    afterChange: [rebuildPortfolio],
+  },
   fields: [
     {
       type: 'row',

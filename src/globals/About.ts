@@ -1,9 +1,13 @@
 import type { GlobalConfig } from 'payload'
+import { rebuildPortfolio } from '../hooks/rebuildPortfolio'
 
 export const About: GlobalConfig = {
   slug: 'about',
   label: 'Sobre mí',
   access: { read: () => true },
+    hooks:{
+      afterChange: [rebuildPortfolio],
+    },
   fields: [
     {
       name: 'bio',
