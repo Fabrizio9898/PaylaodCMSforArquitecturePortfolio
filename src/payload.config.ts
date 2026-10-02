@@ -13,6 +13,7 @@ import { Specialties } from './collections/Specialities'
 import { ProjectTypes } from './collections/Projectypes'
 import { Projects } from './collections/Projects'
 import { es } from '@payloadcms/translations/languages/es'
+import { SiteSettings } from './globals/SiteSettings'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -28,7 +29,7 @@ export default buildConfig({
   },
   collections: [Users, Media, ProjectTypes, Specialties, Projects],
   cors: process.env.NODE_ENV === 'development' ? ['http://localhost:3000'] : [],
-  globals: [Hero, About],
+  globals: [Hero, About, SiteSettings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -41,12 +42,16 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
-    vercelBlobStorage({
-      enabled: true,
-      collections: {
-        media: true,
-      },
-      token: process.env.BLOB_READ_WRITE_TOKEN || '',
-    }),
+    ...(process.env.NODE_ENV === 'production'
+      ? [
+          vercelBlobStorage({
+            enabled: true,
+            collections: {
+              media: true,
+            },
+            token: process.env.BLOB_READ_WRITE_TOKEN || '',
+          }),
+        ]
+      : []),
   ],
 })
